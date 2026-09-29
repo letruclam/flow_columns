@@ -1,5 +1,7 @@
 # flow_columns
 
+[![pub package](https://img.shields.io/pub/v/flow_columns.svg)](https://pub.dev/packages/flow_columns)
+
 Lay cards out in fixed-width columns and flow a card that does not fit across
 the next columns, the way a newspaper continues an article. Each cut gets a
 "Continued" band at the bottom of the cut part and at the top of the part that
