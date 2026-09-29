@@ -9,6 +9,8 @@ follows. Built for kitchen display screens, where a long order must never be
 hidden behind an inner scroll but must also never split an item from its
 modifiers.
 
+![A 15-item ticket flowing across three columns on a kitchen display](https://raw.githubusercontent.com/letruclam/flow_columns/main/screenshots/kitchen_board.jpg)
+
 ```
 ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
 │ Ticket #1233 │ │ Continued... │ │ Ticket #1240 │
