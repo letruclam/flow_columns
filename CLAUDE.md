@@ -33,8 +33,8 @@ repo mới, độc lập với app KDS. Copy nó làm `CLAUDE.md` của repo m�
 
 Chưa làm / cần user quyết:
 
-- 0.1.0 đã publish ngày 29-09-2026, tag `v0.1.0`. 0.2.0 chưa publish. Lệnh: `dart pub publish`
-  trong thư mục package, user tự chạy vì cần đăng nhập Google.
+- 0.2.0 là bản đầu tiên trên pub.dev (29-09-2026), tag `v0.2.0`; 0.1.0 chỉ có tag git, chưa từng
+  lên pub.dev. Publish bằng `dart pub publish`, user tự chạy vì cần đăng nhập Google.
 - App KDS chưa tích hợp package (user bảo làm package trước, tích hợp sau). Việc tích hợp thuộc
   repo app, không phải repo này.
 
@@ -104,7 +104,7 @@ Chưa làm / cần user quyết:
 
 ## 6. Việc có thể làm tiếp (chưa được yêu cầu, hỏi trước khi làm)
 
-- Publish 0.2.0, tag `v0.2.0`.
+- Bản kế tiếp: bump version + CHANGELOG, publish, tag.
 - Ảnh/GIF minh họa cho README (pub.dev hiển thị tốt hơn ASCII).
 - Platform folder cho `example/` nếu muốn chạy ngay.
 - CI (GitHub Actions: analyze + test).
