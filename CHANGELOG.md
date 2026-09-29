@@ -1,3 +1,8 @@
+## 0.2.1
+
+- Add a pub.dev screenshot of the board on a kitchen display.
+- Exclude `CLAUDE.md` from the published package.
+
 ## 0.2.0
 
 - `FlowColumnsBoard.showTopBand` / `showBottomBand` hide a band without
