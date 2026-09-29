@@ -1,0 +1,23 @@
+name: flow_columns
+description: Lay cards out in fixed-width columns and flow a card that does not fit across the next columns, newspaper style, with a "Continued" band at each cut.
+version: 0.1.0
+repository: https://github.com/letruclam/flow_columns
+topics:
+  - layout
+  - columns
+  - masonry
+  - flow
+  - widgets
+
+environment:
+  sdk: ^3.9.2
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
