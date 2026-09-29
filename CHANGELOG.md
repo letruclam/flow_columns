@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Show the kitchen board screenshot in README.
+
 ## 0.2.1
 
 - Add a pub.dev screenshot of the board on a kitchen display.

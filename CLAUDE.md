@@ -24,7 +24,7 @@ repo mới, độc lập với app KDS. Copy nó làm `CLAUDE.md` của repo m�
 - `lib/flow_columns.dart` export hai file trên.
 - Test: `test/column_flow_packer_test.dart` (14 case), `test/flow_columns_board_test.dart`
   (10 case widget test bằng hộp màu thuần). 24/24 pass.
-- `README.md` (tiếng Anh, có hướng dẫn dùng), `CHANGELOG.md` 0.2.1, `LICENSE` MIT
+- `README.md` (tiếng Anh, có hướng dẫn dùng), `CHANGELOG.md` 0.2.2, `LICENSE` MIT
   "Copyright (c) 2026 Lam Le", `example/` (chỉ `pubspec.yaml` + `lib/main.dart`, chưa có platform
   folder; chạy `flutter create .` trong `example/` khi cần).
 - `dart pub publish --dry-run`: 0 warning. `flutter analyze` sạch, `dart format` sạch.
@@ -34,8 +34,9 @@ repo mới, độc lập với app KDS. Copy nó làm `CLAUDE.md` của repo m�
 Chưa làm / cần user quyết:
 
 - 0.2.0 là bản đầu tiên trên pub.dev (29-09-2026), tag `v0.2.0`; 0.1.0 chỉ có tag git, chưa từng
-  lên pub.dev. 0.2.1 (ảnh `screenshots/kitchen_board.jpg` khai báo trong pubspec, `.pubignore`
-  loại `CLAUDE.md`) chưa publish. Publish bằng `dart pub publish`, user tự chạy vì cần đăng nhập
+  lên pub.dev. 0.2.1 (ảnh `screenshots/kitchen_board.jpg` trong pubspec, `.pubignore` loại
+  `CLAUDE.md`) đã publish, tag `v0.2.1`. 0.2.2 (ảnh trong README qua raw.githubusercontent, cần
+  repo public) chưa publish. Publish bằng `dart pub publish`, user tự chạy vì cần đăng nhập
   Google. `CLAUDE.md` đã lọt vào gói 0.2.0, không rút lại được.
 - User cân nhắc chuyển repo GitHub sang private; khi đó bỏ dòng `repository:` trong pubspec.
 - App KDS chưa tích hợp package (user bảo làm package trước, tích hợp sau). Việc tích hợp thuộc
