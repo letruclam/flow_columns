@@ -47,6 +47,8 @@ Future<void> _pump(
   required List<FlowCardStyle> cards,
   required List<Widget> children,
   required double height,
+  bool showTopBand = true,
+  bool showBottomBand = true,
 }) async {
   tester.view.physicalSize = const Size(2400, 900);
   tester.view.devicePixelRatio = 1;
@@ -66,6 +68,8 @@ Future<void> _pump(
                 columnWidth: _columnWidth,
                 columnHeight: height,
                 spacing: _spacing,
+                showTopBand: showTopBand,
+                showBottomBand: showBottomBand,
                 children: children,
               ),
             ),
@@ -136,6 +140,65 @@ void main() {
     final board = _board(tester);
     expect(board.debugContinuedLabel(board.debugRuns[1]), 'Part 2');
     expect(board.debugContinuedLabel(board.debugRuns[0]), isNull);
+  });
+
+  testWidgets('hidden bottom band gives its room back to items', (
+    tester,
+  ) async {
+    // Without the 36px bottom band only cutPadding + border must stay free
+    // after an item, so items 0-3 fit column 0 instead of 0-2.
+    await _pump(
+      tester,
+      cards: const [_plain],
+      children: _card(0, items: 6),
+      height: 300,
+      showBottomBand: false,
+    );
+    final board = _board(tester);
+    final runs = board.debugRuns;
+    expect(runs.length, 2);
+    expect(runs[0].fragmentEnd, 5);
+    expect(runs[0].continues, isTrue);
+    expect(board.debugContinuedLabel(runs[1]), 'Continued...');
+    expect(tester.getTopLeft(find.text('Card 0 Item 4')).dy, 2 + 36 + 8);
+  });
+
+  testWidgets(
+    'hidden top band starts the continuation right under the border',
+    (tester) async {
+      await _pump(
+        tester,
+        cards: const [_plain],
+        children: _card(0, items: 6),
+        height: 300,
+        showTopBand: false,
+      );
+      final board = _board(tester);
+      final runs = board.debugRuns;
+      expect(runs.length, 2);
+      expect(runs[0].fragmentEnd, 4);
+      expect(runs[1].isContinuation, isTrue);
+      expect(board.debugContinuedLabel(runs[1]), isNull);
+      expect(tester.getTopLeft(find.text('Card 0 Item 3')).dy, 2 + 8);
+    },
+  );
+
+  testWidgets('both bands hidden', (tester) async {
+    await _pump(
+      tester,
+      cards: const [_plain],
+      children: _card(0, items: 6),
+      height: 300,
+      showTopBand: false,
+      showBottomBand: false,
+    );
+    final board = _board(tester);
+    final runs = board.debugRuns;
+    expect(runs.length, 2);
+    expect(runs[0].fragmentEnd, 5);
+    expect(board.debugContinuedLabel(runs[1]), isNull);
+    expect(tester.getTopLeft(find.text('Card 0 Item 4')).dy, 2 + 8);
+    expect(runs[1].bottom, lessThanOrEqualTo(300));
   });
 
   testWidgets('second card starts below the first or in the next column', (

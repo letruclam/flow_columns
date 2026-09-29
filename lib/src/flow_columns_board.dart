@@ -154,6 +154,8 @@ class FlowColumnsBoard extends MultiChildRenderObjectWidget {
     this.lockOverlayColor = const Color(0x809E9E9E),
     this.topBand = const FlowBandStyle(),
     this.bottomBand = const FlowBandStyle(),
+    this.showTopBand = true,
+    this.showBottomBand = true,
     this.continuedLabel = 'Continued...',
     this.cutPadding = 8,
     this.continuedTopPadding = 8,
@@ -175,6 +177,12 @@ class FlowColumnsBoard extends MultiChildRenderObjectWidget {
 
   /// Band closing a cut run; its text is always [continuedLabel].
   final FlowBandStyle bottomBand;
+
+  /// Whether [topBand] is drawn and reserved above a continuation.
+  final bool showTopBand;
+
+  /// Whether [bottomBand] is drawn and reserved at the bottom of a cut run.
+  final bool showBottomBand;
   final String continuedLabel;
 
   /// Space kept between the last fragment of a cut run and the bottom band.
@@ -196,6 +204,8 @@ class FlowColumnsBoard extends MultiChildRenderObjectWidget {
       lockOverlayColor: lockOverlayColor,
       topBand: topBand,
       bottomBand: bottomBand,
+      showTopBand: showTopBand,
+      showBottomBand: showBottomBand,
       continuedLabel: continuedLabel,
       cutPadding: cutPadding,
       continuedTopPadding: continuedTopPadding,
@@ -220,6 +230,8 @@ class FlowColumnsBoard extends MultiChildRenderObjectWidget {
       ..lockOverlayColor = lockOverlayColor
       ..topBand = topBand
       ..bottomBand = bottomBand
+      ..showTopBand = showTopBand
+      ..showBottomBand = showBottomBand
       ..continuedLabel = continuedLabel
       ..cutPadding = cutPadding
       ..continuedTopPadding = continuedTopPadding
@@ -243,6 +255,8 @@ class RenderFlowColumnsBoard extends RenderBox
     required Color lockOverlayColor,
     required FlowBandStyle topBand,
     required FlowBandStyle bottomBand,
+    required bool showTopBand,
+    required bool showBottomBand,
     required String continuedLabel,
     required double cutPadding,
     required double continuedTopPadding,
@@ -258,6 +272,8 @@ class RenderFlowColumnsBoard extends RenderBox
        _lockOverlayColor = lockOverlayColor,
        _topBand = topBand,
        _bottomBand = bottomBand,
+       _showTopBand = showTopBand,
+       _showBottomBand = showBottomBand,
        _continuedLabel = continuedLabel,
        _cutPadding = cutPadding,
        _continuedTopPadding = continuedTopPadding,
@@ -345,6 +361,20 @@ class RenderFlowColumnsBoard extends RenderBox
     needsLayout ? markNeedsLayout() : markNeedsPaint();
   }
 
+  bool _showTopBand;
+  set showTopBand(bool value) {
+    if (_showTopBand == value) return;
+    _showTopBand = value;
+    markNeedsLayout();
+  }
+
+  bool _showBottomBand;
+  set showBottomBand(bool value) {
+    if (_showBottomBand == value) return;
+    _showBottomBand = value;
+    markNeedsLayout();
+  }
+
   String _continuedLabel;
   set continuedLabel(String value) {
     if (_continuedLabel == value) return;
@@ -397,10 +427,10 @@ class RenderFlowColumnsBoard extends RenderBox
   List<FlowRun> get debugRuns => _pack?.runs ?? const [];
 
   /// Text of the band opening [run], or null when [run] is not a
-  /// continuation.
+  /// continuation or the top band is hidden.
   @visibleForTesting
   String? debugContinuedLabel(FlowRun run) {
-    if (!run.isContinuation) return null;
+    if (!run.isContinuation || !_showTopBand) return null;
     return _labelFor(_fragmentAt(run.fragmentStart));
   }
 
@@ -451,8 +481,8 @@ class RenderFlowColumnsBoard extends RenderBox
       columnHeight: _columnHeight,
       spacing: _spacing,
       border: _borderWidth,
-      continuedBandHeight: _topBand.height,
-      continuedFooterHeight: _bottomBand.height,
+      continuedBandHeight: _showTopBand ? _topBand.height : 0,
+      continuedFooterHeight: _showBottomBand ? _bottomBand.height : 0,
       cutPadding: _cutPadding,
       continuedTopPadding: _continuedTopPadding,
     );
@@ -604,7 +634,7 @@ class RenderFlowColumnsBoard extends RenderBox
         final canvas = context.canvas;
         canvas.drawRRect(rrect, fill);
 
-        if (run.isContinuation) {
+        if (run.isContinuation && _showTopBand) {
           _paintBand(
             canvas,
             rect,
@@ -615,7 +645,7 @@ class RenderFlowColumnsBoard extends RenderBox
             ),
           );
         }
-        if (run.continues) {
+        if (run.continues && _showBottomBand) {
           _paintBand(
             canvas,
             rect,

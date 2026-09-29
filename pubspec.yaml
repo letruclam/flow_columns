@@ -1,6 +1,6 @@
 name: flow_columns
 description: Lay cards out in fixed-width columns and flow a card that does not fit across the next columns, newspaper style, with a "Continued" band at each cut.
-version: 0.1.0
+version: 0.2.0
 repository: https://github.com/letruclam/flow_columns
 topics:
   - layout

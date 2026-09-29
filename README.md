@@ -20,6 +20,9 @@ modifiers.
 └──────────────┘
 ```
 
+The "Continued..." bands belong to the board and can be relabelled or hidden.
+"Not submitted" is a tail fragment supplied by the app, like every other row.
+
 ## Features
 
 - Fixed-width columns filled top to bottom; a full column wraps to the next
@@ -105,7 +108,19 @@ bottom border of the card.
 style and text inset of the bands. The bottom band always shows
 `FlowColumnsBoard.continuedLabel`. The top band shows the
 `FlowFragment.continuedLabel` of the fragment that opens the continuation, or
-`continuedLabel` when that is empty.
+`continuedLabel` when that is empty. An empty label draws a band without text.
+
+`showTopBand` and `showBottomBand` (default `true`) hide a band entirely: it
+is neither drawn nor reserved, so items get its room back. `cutPadding` and
+`continuedTopPadding` still apply, so set them to `0` for a flush cut.
+
+```dart
+FlowColumnsBoard(
+  continuedLabel: 'See next column',
+  showBottomBand: false,
+  ...
+)
+```
 
 ### Item fragments and dry layout
 

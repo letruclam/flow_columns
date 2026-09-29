@@ -1,3 +1,10 @@
+## 0.2.0
+
+- `FlowColumnsBoard.showTopBand` / `showBottomBand` hide a band without
+  drawing or reserving it.
+- README states that the tail row is app-supplied and how to relabel or
+  hide the bands.
+
 ## 0.1.0
 
 - Initial release.

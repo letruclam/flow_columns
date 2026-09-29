@@ -23,9 +23,9 @@ repo mới, độc lập với app KDS. Copy nó làm `CLAUDE.md` của repo m�
   `FlowFragment`, `FlowCardStyle`, `FlowBandStyle`, `FlowColumnsParentData`.
 - `lib/flow_columns.dart` export hai file trên.
 - Test: `test/column_flow_packer_test.dart` (14 case), `test/flow_columns_board_test.dart`
-  (7 case widget test bằng hộp màu thuần). 21/21 pass.
-- `README.md` (tiếng Anh, có hướng dẫn dùng), `CHANGELOG.md` 0.1.0, `LICENSE` MIT
-  "Copyright (c) 2026 Blogic", `example/` (chỉ `pubspec.yaml` + `lib/main.dart`, chưa có platform
+  (10 case widget test bằng hộp màu thuần). 24/24 pass.
+- `README.md` (tiếng Anh, có hướng dẫn dùng), `CHANGELOG.md` 0.2.0, `LICENSE` MIT
+  "Copyright (c) 2026 Lam Le", `example/` (chỉ `pubspec.yaml` + `lib/main.dart`, chưa có platform
   folder; chạy `flutter create .` trong `example/` khi cần).
 - `dart pub publish --dry-run`: 0 warning. `flutter analyze` sạch, `dart format` sạch.
 - Chỉ phụ thuộc `flutter`; dev: `flutter_test`, `flutter_lints ^5.0.0`. SDK `^3.9.2`,
@@ -33,10 +33,8 @@ repo mới, độc lập với app KDS. Copy nó làm `CLAUDE.md` của repo m�
 
 Chưa làm / cần user quyết:
 
-- `repository:` trong `pubspec.yaml` đang là URL giả định `https://github.com/blogiclab/flow_columns`.
-  Đổi cho đúng hoặc bỏ dòng này trước khi publish.
-- Xác nhận tên chủ bản quyền trong LICENSE.
-- Chưa publish. Lệnh: `dart pub publish` trong thư mục package (lần đầu cần đăng nhập Google).
+- 0.1.0 đã publish ngày 29-09-2026, tag `v0.1.0`. 0.2.0 chưa publish. Lệnh: `dart pub publish`
+  trong thư mục package, user tự chạy vì cần đăng nhập Google.
 - App KDS chưa tích hợp package (user bảo làm package trước, tích hợp sau). Việc tích hợp thuộc
   repo app, không phải repo này.
 
@@ -56,7 +54,10 @@ Chưa làm / cần user quyết:
   fragmentStart, fragmentEnd (nửa mở)}`.
 - `FlowColumnsBoard({cards: List<FlowCardStyle>, columnWidth, columnHeight, spacing,
   borderWidth=2, radius=16, fillColor=white, lockOverlayColor=grey 50%, topBand, bottomBand
-  (FlowBandStyle), continuedLabel='Continued...', cutPadding=8, continuedTopPadding=8, children})`.
+  (FlowBandStyle), showTopBand=true, showBottomBand=true, continuedLabel='Continued...',
+  cutPadding=8, continuedTopPadding=8, children})`. `showTopBand`/`showBottomBand` false → band
+  không vẽ và không chiếm chỗ (packer nhận chiều cao band = 0), `cutPadding`/`continuedTopPadding`
+  vẫn áp dụng; `debugContinuedLabel` trả null khi top band ẩn.
   Text direction và text scaler lấy từ context, không truyền.
 - `FlowFragment({cardIndex, kind, leadingGap=0, continuedLabel='', child})`. Loại `item` tự bọc
   `Scrollbar > SingleChildScrollView` dọc. `continuedLabel` rỗng → dùng nhãn của board.
@@ -103,7 +104,7 @@ Chưa làm / cần user quyết:
 
 ## 6. Việc có thể làm tiếp (chưa được yêu cầu, hỏi trước khi làm)
 
-- Publish 0.1.0; sau đó tag git, badge pub trong README.
+- Publish 0.2.0, tag `v0.2.0`.
 - Ảnh/GIF minh họa cho README (pub.dev hiển thị tốt hơn ASCII).
 - Platform folder cho `example/` nếu muốn chạy ngay.
 - CI (GitHub Actions: analyze + test).
